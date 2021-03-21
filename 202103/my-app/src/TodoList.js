@@ -17,11 +17,14 @@ class TodoList extends Component {
                     <input value={this.state.inputValue}
                            onChange={this.handleInputChange.bind(this)}
                     />
-                    <button>submit</button>
+                    <button onClick={this.handleBtnClick.bind(this)}>submit</button>
                 </div>
                 <ul>
-                    <li>learn english</li>
-                    <li>learn react</li>
+                    {
+                        this.state.list.map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        })
+                    }
                 </ul>
             </Fragment>
         )
@@ -30,6 +33,13 @@ class TodoList extends Component {
     handleInputChange(e) {
         this.setState({
             inputValue: e.target.value
+        })
+    }
+
+    handleBtnClick() {
+        this.setState({
+            list: [...this.state.list, this.state.inputValue],
+            inputValue: ''
         })
     }
 }
